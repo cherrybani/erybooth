@@ -1,0 +1,306 @@
+<<<<<<< HEAD
+.home-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.home-container {
+  position: center;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.53);
+}
+
+.content {
+  display: flex;
+  gap: 15px;
+  flex-direction: column;
+  align-items: center; 
+  justify-content: center; 
+  text-align: center;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 12px;
+  padding: 40px;
+  background: #ffb6bd;
+  color: black;
+  border: 4px solid black;
+  border-radius: 0;
+  box-shadow: 4px 4px 0 black;
+}
+
+.content h5 {
+  font-size: 10px;
+  margin: 0;
+  color: #888;
+  line-height: 1.2;
+  font-weight: normal;
+}
+
+.container-tombol {
+  display: flex;
+  flex-direction: column; /* Biar tombolnya atas-bawah */
+  gap: 20px;             /* Kasih jarak antar tombol */
+  align-items: center;
+  justify-content: center;
+}
+
+.pixel-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Supaya teks tombol di tengah */
+  font-family: 'Press Start 2P', cursive;
+  font-size: 12px;
+  background: #ffd7d5;
+  color: black;
+  border: 4px solid black;
+  box-shadow: 4px 4px 0 black;
+  cursor: pointer;
+  height: 40px;
+  width: 150px; /* Lebarkan sedikit supaya teks muat */
+}
+
+.pixel-btn:active {
+  box-shadow: 0 0 0 black;
+  transform: translate(4px, 4px);
+}
+=======
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display+SC:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.home-bg {
+  display: flex;
+  justify-content: center; /* Tengah horizontal */
+  align-items: center;     /* Tengah vertikal */
+  min-height: 100vh;       /* Full seukuran layar laptop */
+  background-size: cover;
+  background-position: center;
+}
+
+.frame {
+  background: rgba(0, 0, 0, 0.6);
+  max-width: 1200px;
+  width: 100%;
+  min-height: 600px;
+  padding: 20px;
+  border-radius: 10px;
+  border: 2px solid rgba(104, 11, 128, 0.692);
+  max-height: 85vh; 
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 10px;
+}
+
+.header {
+  background-color: rgba(0, 0, 0, 0.872);
+  padding: 5px 20px;
+  border-radius: 15px;
+  border: 1px solid rgba(104, 11, 128, 0.692);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header h2 {
+  font-family: "Playfair Display SC", serif;
+  color: white;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.nav-menu {
+  justify-content: space-between;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.nav-menu a {
+  text-decoration: none;
+  color: white;
+  font-weight: 500;
+  padding: 10px 20px;
+  justify-content: space-between;
+  gap: 50px;
+}
+
+.nav-menu a:hover {
+  background: linear-gradient(to bottom left, rgba(158, 10, 194, 0.345), rgba(0,0,0,0.8));
+  border-radius: 10px;
+}
+
+.nav-link-contact {
+  display: inline-block !important;
+  padding: 10px;
+  cursor: pointer;
+  color: white !important;
+  text-decoration: none;
+  font-family: inherit; /* Ikut font yang sama */
+  z-index: 10;
+  position: relative;
+}
+
+.nav-link-contact:hover {
+  background-image: linear-gradient(to bottom left, rgba(158, 10, 194, 0.345), rgba(0,0,0,0.8));
+  border-radius: 10px;
+}
+
+.nav-item-contact {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.nav-item-contact:hover {
+  background-image: linear-gradient(to bottom left, rgba(158, 10, 194, 0.345), rgba(0,0,0,0.8));
+  border-radius: 10px;
+}
+
+.hero-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 30px;
+}
+
+.bio {
+  color: #ddd;
+  line-height: 1;
+}
+
+
+.profile-container {       
+  width: 260px;
+  height: 200px;
+  border: 2px solid rgba(104, 11, 128, 0.8); /* Border ungu */
+  border-radius: 25px; /* Bingkai tumpul */
+  position: relative;
+  margin-top: 5px;
+}
+
+.profile-img {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%); /* INI BIAR PASTI DI TENGAH */
+  width: 100%;
+  height: 125%; /* Biar nongol ke atas */
+  object-fit: cover;
+  object-position: top;
+  clip-path: inset(-100px 0px 0px 0px round 0px 0px 25px 25px);
+}
+
+.bio-text {
+  gap: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.bio-text h1 {
+  font-size: 50px;
+  line-height: 1;
+}
+
+.bio-text .first-name {
+  font-family: "Permanent Marker", cursive;
+  font-weight: 700;
+  color: #b855e7d6;
+}
+
+.last-name {
+  font-family: "Playfair Display SC", serif;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.cta-button {
+  display: flex; /* Membuat tombol berjejer ke samping */
+  gap: 15px;     /* Memberi jarak antar tombol */
+  justify-content: center; /* Opsional: biar tombol ke tengah */
+  margin-top: 20px;
+}
+
+.first-button, .second-button {
+  display: flex;
+  background: linear-gradient(to bottom right, rgba(0,0,0,0.8), rgba(210, 121, 230, 0.546));
+  color: #ffffff;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 25px;
+  border-radius: 12px;
+  border: 2px solid rgba(158, 10, 194, 0.345);
+  cursor: pointer;
+  text-decoration: none;
+  min-width: 150px; /* Biar ukuran tombol sama rata */
+  transition: 0.3s;
+}
+
+.first-button:hover {
+  background-color: rgba(158, 10, 194, 0.545);
+}
+
+.second-button:hover {
+  background-color: rgba(158, 10, 194, 0.345);
+  border-color: rgba(158, 10, 194, 0.545);
+}
+
+.features {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 20px;
+  margin-bottom: 30px;
+}
+
+.features .card {
+  flex: 1;
+  background: linear-gradient(to bottom left, rgba(157, 10, 194, 0.546), rgba(0,0,0,0.8));
+  border: 2px solid rgba(158, 10, 194, 0.345);
+  line-height: 1;
+  color: white;
+  padding: 20px;
+  border-radius: 20px;
+  text-align: center;
+}
+
+.skills {
+  display: flex;
+  background: linear-gradient(to bottom right, rgba(0,0,0,0.8), rgba(210, 121, 230, 0.546));
+  border: 2px solid rgba(158, 10, 194, 0.345);
+  border-radius: 10px;
+  justify-content: space-between;
+  gap: 5px;
+  padding: 10px;
+  font-size: small;
+}
+
+.skills .skill-item {
+  flex: 1;
+  background: linear-gradient(to bottom left, rgba(157, 10, 194, 0.546), rgba(0,0,0,0.8));
+  border: 2px solid rgba(158, 10, 194, 0.345);
+  color: white;
+  padding: 5px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+>>>>>>> 70a71424ea950b6a4167eb967ebe60411b7c2703

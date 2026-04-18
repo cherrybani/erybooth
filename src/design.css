@@ -1,0 +1,322 @@
+<<<<<<< HEAD
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+html,body,#root{
+  width:100%;
+  height:100%;
+}
+
+/* page */
+.design-container{
+  min-height:100vh;
+  background-size:cover;
+  background-position:center;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:20px;
+  position:relative;
+}
+
+.overlayer{
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,.18);
+  pointer-events:none;
+}
+
+/* card */
+.decoration-card{
+  position:relative;
+  z-index:2;
+  width:900px;
+  max-width:100%;
+  background:#f1d8fa;
+  border-radius:24px;
+  padding:28px;
+  box-shadow:0 18px 40px rgba(0,0,0,.25);
+}
+
+.title{
+  text-align:center;
+  margin-bottom:22px;
+  color:#222;
+  font-family:'Press Start 2P', cursive;
+  font-size:18px;
+}
+
+/* layout */
+.main-layout{
+  display:flex;
+  gap:24px;
+  min-height:460px;
+}
+
+/* kiri */
+.preview-panel{
+  flex:1;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.frame-wrapper{
+  position:relative;
+  display:grid;
+  gap:8px;
+  padding:12px;
+  width:max-content;
+}
+
+/* frame sizes */
+.layout-1{ padding-bottom:60px; }
+.layout-1 .photo-slot{ width:220px; height:220px; }
+
+.layout-2{ padding-bottom:60px; }
+.layout-2 .photo-slot{ width:180px; height:120px; }
+
+.layout-3{ padding-bottom:60px; }
+.layout-3 .photo-slot{ width:160px; height:110px; }
+
+.layout-4{ padding-bottom:60px; }
+.layout-4 .photo-slot{ width:150px; height:100px; }
+
+.photo-slot{
+  background:#ddd;
+  overflow:hidden;
+  border-radius:10px;
+}
+
+.photo-slot img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+/* sticker */
+.sticker-item{
+  position:absolute;
+  z-index:20;
+  cursor:move;
+}
+
+.sticker-img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  pointer-events:none;
+}
+
+/* kanan */
+.selection-panel{
+  flex:2;
+  background:#d3a0c0;
+  border-radius:16px;
+  display:flex;
+  flex-direction:column;
+  height:500px;
+  overflow:hidden;
+}
+
+.tab-bar{
+  display:flex;
+  background:#835b83;
+}
+
+.tab-btn{
+  flex:1;
+  border:none;
+  background:transparent;
+  padding:14px;
+  font-weight:700;
+  cursor:pointer;
+}
+
+.tab-btn.active{
+  background:#9a739a;
+}
+
+/* scroll cuma sini */
+.grid-content{
+  flex:1;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:14px;
+  padding:18px;
+  overflow-y:auto;
+  overflow-x:hidden;
+}
+
+.grid-item{
+  height:90px;
+  border-radius:12px;
+  background:#777;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  cursor:pointer;
+  transition:.15s;
+  overflow:hidden;
+}
+
+.grid-item:hover{
+  transform:scale(1.03);
+}
+
+.character-thumb{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+}
+
+/* footer */
+.footer-actions{
+  display:flex;
+  justify-content:center;
+  gap:14px;
+  margin-top:22px;
+}
+
+.save-btn,
+.delete-btn{
+  border:none;
+  background:#f0a7f7;
+  padding:10px 22px;
+  border-radius:10px;
+  font-weight:700;
+  cursor:pointer;
+}
+
+.save-btn{
+  min-width:180px;
+=======
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.home-bg {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-size: cover;
+  background-position: center;
+  padding: 20px; /* Tambahan biar frame gak nempel layar pas di HP */
+}
+
+.frame {
+  background: rgba(0, 0, 0, 0.6);
+  max-width: 1200px;
+  width: 100%;
+  padding: 20px;
+  border-radius: 20px;
+  border: 2px solid rgba(104, 11, 128, 0.692);
+  /* KUNCI: Biar bisa scroll kalau kartu sudah banyak */
+  max-height: 85vh; 
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 10px;
+}
+
+/* --- Custom Scrollbar --- */
+.frame::-webkit-scrollbar {
+  width: 6px;
+}
+.frame::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+}
+.frame::-webkit-scrollbar-thumb {
+  background: rgba(104, 11, 128, 0.8);
+  border-radius: 10px;
+}
+
+/* --- Grid System --- */
+.project-grid {
+  display: grid;
+  /* Responsif: otomatis nambah kolom kalau layar lebar, pindah baris kalau sempit */
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+  gap: 25px;
+  width: 100%;
+  padding: 20px 0;
+}
+
+/* --- Project Card --- */
+.project-card {
+  border-radius: 15px;
+  overflow: hidden;
+  background: linear-gradient(to bottom left, rgba(158, 10, 194, 0.345), rgba(0,0,0,0.8));
+  border: 1px solid rgba(158, 10, 194, 0.2);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+}
+
+.project-card:hover {
+  transform: translateY(-10px); /* Efek melayang ke atas */
+  box-shadow: 0 10px 20px rgba(104, 11, 128, 0.4);
+}
+
+/* --- Image Handling --- */
+.image-wrapper {
+  width: 100%;
+  height: 200px; /* Tinggi kotak gambar tetap */
+  overflow: hidden;
+  background: #1a1a1a;
+  position: relative;
+}
+
+.image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Biar gambar gak gepeng */
+  transition: transform 0.5s ease;
+}
+
+.project-card:hover .image-wrapper img {
+  transform: scale(1.1);
+}
+
+/* --- Card Info --- */
+.card-info {
+  padding: 15px;
+  color: white; /* Ganti ke putih karena background kamu gelap */
+}
+
+.card-info .category {
+  font-size: 10px;
+  display: inline-block;
+  background: rgba(158, 10, 194, 0.5);
+  padding: 4px 10px;
+  border-radius: 20px;
+  margin-bottom: 10px;
+  color: #fff;
+}
+
+.card-info h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #eee; /* Abu-abu terang biar enak dibaca */
+  text-transform: capitalize;
+}
+
+/* Styling Link Detail */
+.lihat-detail {
+  display: inline-block;
+  margin-top: 10px;
+  color: #c447ff;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.lihat-detail:hover {
+  text-decoration: underline;
+>>>>>>> 70a71424ea950b6a4167eb967ebe60411b7c2703
+}

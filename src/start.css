@@ -1,0 +1,61 @@
+.content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 20px;
+  background: #ffb6bd;
+}
+
+.frame-list {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.frame-option {
+  width: 120px;
+  height: fit-content;    /* KUNCI: Tinggi akan pas mengikuti isi */
+  padding: 12px 12px 40px; /* 40px adalah "lebihan" tetap untuk logo Erybooth */
+  background: white;
+  border: 3px solid black;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;               /* Jarak antar slot foto */
+  cursor: pointer;
+  position: relative;
+}
+
+/* Khusus layout 1 (Polaroid Style) */
+.layout-1 {
+  width: 160px;          /* Polaroid biasanya lebih lebar */
+  padding: 15px 15px 45px;
+}
+.layout-1 .slot {
+  aspect-ratio: 1 / 1;    /* Foto polaroid kotak sempurna */
+}
+
+.layout-1 { grid-template-rows: 1fr; }
+.layout-2 { grid-template-rows: repeat(2, 1fr); }
+.layout-3 { grid-template-rows: repeat(3, 1fr); }
+.layout-4 { grid-template-rows: repeat(4, 1fr); }
+
+.slot {
+  background-color: #e2e2e2;
+  border: 1px solid #ddd;
+  aspect-ratio: 4 / 3;    /* Ukuran foto landscape standar photobooth */
+  width: 100%;
+  border-radius: 2px;
+}
+
+.selected {
+  border: 3px solid red;
+}
+
+.next-btn {
+  padding: 10px 20px;
+  border: none;
+  background: #dc72a3;
+  color: white;
+  cursor: pointer;
+}

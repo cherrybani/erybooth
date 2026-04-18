@@ -1,0 +1,125 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.home-bg {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-size: cover;
+  background-position: center;
+  padding: 20px; /* Tambahan biar frame gak nempel layar pas di HP */
+}
+
+.frame {
+  background: rgba(0, 0, 0, 0.6);
+  max-width: 1200px;
+  width: 100%;
+  padding: 20px;
+  border-radius: 20px;
+  border: 2px solid rgba(104, 11, 128, 0.692);
+  /* KUNCI: Biar bisa scroll kalau kartu sudah banyak */
+  max-height: 85vh; 
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 10px;
+}
+
+/* --- Custom Scrollbar --- */
+.frame::-webkit-scrollbar {
+  width: 6px;
+}
+.frame::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+}
+.frame::-webkit-scrollbar-thumb {
+  background: rgba(104, 11, 128, 0.8);
+  border-radius: 10px;
+}
+
+/* --- Grid System --- */
+.project-grid {
+  display: grid;
+  /* Responsif: otomatis nambah kolom kalau layar lebar, pindah baris kalau sempit */
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+  gap: 25px;
+  width: 100%;
+  padding: 20px 0;
+}
+
+/* --- Project Card --- */
+.project-card {
+  border-radius: 15px;
+  overflow: hidden;
+  background: linear-gradient(to bottom left, rgba(158, 10, 194, 0.345), rgba(0,0,0,0.8));
+  border: 1px solid rgba(158, 10, 194, 0.2);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+}
+
+.project-card:hover {
+  transform: translateY(-10px); /* Efek melayang ke atas */
+  box-shadow: 0 10px 20px rgba(104, 11, 128, 0.4);
+}
+
+/* --- Image Handling --- */
+.image-wrapper {
+  width: 100%;
+  height: 200px; /* Tinggi kotak gambar tetap */
+  overflow: hidden;
+  background: #1a1a1a;
+  position: relative;
+}
+
+.image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Biar gambar gak gepeng */
+  transition: transform 0.5s ease;
+}
+
+.project-card:hover .image-wrapper img {
+  transform: scale(1.1);
+}
+
+/* --- Card Info --- */
+.card-info {
+  padding: 15px;
+  color: white; /* Ganti ke putih karena background kamu gelap */
+}
+
+.card-info .category {
+  font-size: 10px;
+  display: inline-block;
+  background: rgba(158, 10, 194, 0.5);
+  padding: 4px 10px;
+  border-radius: 20px;
+  margin-bottom: 10px;
+  color: #fff;
+}
+
+.card-info h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #eee; /* Abu-abu terang biar enak dibaca */
+  text-transform: capitalize;
+}
+
+/* Styling Link Detail */
+.lihat-detail {
+  display: inline-block;
+  margin-top: 10px;
+  color: #c447ff;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.lihat-detail:hover {
+  text-decoration: underline;
+}
