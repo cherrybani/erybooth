@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React, { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import Moveable from "react-moveable";
@@ -9,11 +8,16 @@ import "./design.css";
 const CATEGORIES = [
   { key: "colors", label: "color" },
   { key: "characters", label: "Character" },
-  { key: "textures", label: "Tekstur" },
+  { key: "background", label: "Background" },
 ];
 
 const stickerModules = import.meta.glob(
   "./assets/stickers/*.{png,jpg,jpeg,webp}",
+  { eager: true }
+);
+
+const stripModules = import.meta.glob(
+  "./assets/background/**/*.{png,jpg,jpeg,webp}",
   { eager: true }
 );
 
@@ -22,21 +26,6 @@ const characterItems = Object.values(stickerModules).map((mod, index) => ({
   image: mod.default,
 }));
 
-const SELECTION_ITEMS = {
-  colors: [
-    "#ffb3ba",
-    "#baffc9",
-    "#bae1ff",
-    "#ffffba",
-    "#ffdfba",
-    "#e0bbe4",
-    "#d4a373",
-    "#ffffff",
-  ],
-  characters: characterItems,
-  textures: ["Coming Soon!"],
-};
-
 export default function Design() {
   const navigate = useNavigate();
   const location = useLocation();
@@ -44,10 +33,33 @@ export default function Design() {
   const [selectedId, setSelectedId] = useState(null);
   const [activeCategory, setActiveCategory] = useState("characters");
   const [activeFrameColor, setActiveFrameColor] = useState("#ffffff");
+  const [activeStripBg, setActiveStripBg] = useState("");
   const [stickers, setStickers] = useState([]);
 
   const layoutCount = location.state?.chosenLayout || 1;
   const photos = location.state?.photos || [];
+
+  const stripItems = Object.entries(stripModules)
+    .filter(([path]) => path.includes(`${layoutCount}-box/`))
+    .map(([path, mod], index) => ({
+      id: index + 1,
+      image: mod.default,
+    }));
+
+  const SELECTION_ITEMS = {
+    colors: [
+      "#ffb3ba",
+      "#baffc9",
+      "#bae1ff",
+      "#ffffba",
+      "#ffdfba",
+      "#e0bbe4",
+      "#d4a373",
+      "#ffffff",
+    ],
+    characters: characterItems,
+    background: stripItems,
+  };
 
   const addSticker = (image) => {
     setStickers((prev) => [
@@ -65,18 +77,18 @@ export default function Design() {
   };
 
   const handleSave = async () => {
-  const target = document.querySelector(".frame-wrapper");
+    const target = document.querySelector(".frame-wrapper");
 
-  const canvas = await html2canvas(target, {
-    backgroundColor: null,
-    useCORS: true
-  });
+    const canvas = await html2canvas(target, {
+      backgroundColor: null,
+      useCORS: true,
+    });
 
-  const link = document.createElement("a");
-  link.download = "photobooth.png";
-  link.href = canvas.toDataURL("image/png");
-  link.click();
-};
+    const link = document.createElement("a");
+    link.download = "photobooth.png";
+    link.href = canvas.toDataURL("image/png");
+    link.click();
+  };
 
   return (
     <div
@@ -91,9 +103,16 @@ export default function Design() {
           <div className="preview-panel">
             <div
               className={`frame-wrapper layout-${layoutCount}`}
-              style={{ backgroundColor: activeFrameColor }}
+              style={{
+                backgroundColor: activeFrameColor,
+              }}
             >
-              {/* PHOTO SLOT */}
+              {activeStripBg && (
+                <img src={activeStripBg} alt="" className="strip-bg" />
+            )}
+
+            <div className="watermark">Erybooth</div>
+
               {Array.from({ length: layoutCount }).map((_, index) => (
                 <div className="photo-slot" key={index}>
                   {photos[index] && (
@@ -102,7 +121,6 @@ export default function Design() {
                 </div>
               ))}
 
-              {/* STICKERS */}
               {stickers.map((s) => (
                 <div
                   key={s.id}
@@ -152,10 +170,15 @@ export default function Design() {
                   onClick={() => {
                     if (activeCategory === "colors") {
                       setActiveFrameColor(item);
+                      setActiveStripBg("");
                     }
 
                     if (activeCategory === "characters") {
                       addSticker(item.image);
+                    }
+
+                    if (activeCategory === "background") {
+                      setActiveStripBg(item.image);
                     }
                   }}
                   style={{
@@ -163,15 +186,14 @@ export default function Design() {
                       activeCategory === "colors" ? item : "#ffffff",
                   }}
                 >
-                  {activeCategory === "characters" && (
+                  {(activeCategory === "characters" ||
+                    activeCategory === "background") && (
                     <img
                       src={item.image}
                       alt=""
                       className="character-thumb"
                     />
                   )}
-
-                  {activeCategory === "textures" && item}
                 </div>
               ))}
             </div>
@@ -197,9 +219,7 @@ export default function Design() {
           onResize={({ width, height }) => {
             setStickers((prev) =>
               prev.map((s) =>
-                s.id === selectedId
-                  ? { ...s, width, height }
-                  : s
+                s.id === selectedId ? { ...s, width, height } : s
               )
             );
           }}
@@ -218,6 +238,7 @@ export default function Design() {
           <button className="save-btn" onClick={handleSave}>
             save
           </button>
+
           <button
             className="delete-btn"
             onClick={() => setStickers([])}
@@ -228,106 +249,4 @@ export default function Design() {
       </div>
     </div>
   );
-=======
-import React, { useEffect, useState } from 'react';
-import { Link } from "react-router-dom";
-import { supabase } from './supabaseClient';
-import background from './assets/bg.png'
-import Modal from './modal';
-import './design.css';
-
-export default function Design() {
-  const [isContactOpen, setIsContactOpen] = useState(false);
-  const [projects, setProjects] = useState([]);
-
-  useEffect(() => {
-    async function fetchProjects() {
-            let { data, error } = await supabase
-            .from('projects')
-            .select('*')
-              .eq('category', 'design');
-
-            console.log('DATA:', data)
-            console.log('ERROR:', error)
-
-      if (error) console.log(error);
-      else setProjects(data);
-    }
-    fetchProjects();
-  }, []);
-
-  return (
-    <div
-      className="home-bg"
-      style={{ backgroundImage: `url(${background})` }}>
-      <div className="frame">
-        <nav className="header">
-          <h2>Cherry</h2>
-          <div className="nav-menu">
-            <Link to="/">Home</Link>
-            <Link to="/project">Project</Link>
-            <Link to="/design">Design</Link>
-            <span 
-            className="nav-item-contact" 
-            onClick={() => setIsContactOpen(true)}
-            style={{ cursor: 'pointer', color: 'white', fontSize: '16px', fontWeight: '500',marginLeft: '20px' }} 
-            >
-            Contact
-            </span>
-          </div>
-        </nav>
-
-
-      <div className="project-grid">
-        {projects.map((item) => (
-          <div className="project-card" key={item.id}>
-           <div className="image-wrapper">
-            <img src={item.image_url} alt={item.title} />
-           </div>
-          <div className="card-info">
-            <span className="category">{item.category}</span>
-            <h3>{item.title}</h3>
-            <a href={item.link} target="_blank" rel="noreferrer" className="btn">
-              Lihat Detail
-            </a>
-           </div>
-         </div>
-       ))}
-      </div>
-
-    <Modal isOpen={isContactOpen} onClose={() => setIsContactOpen(false)} title="Contact Me">
-  <div className="contact-list">
-    <p>
-      <a href="mailto:banicherry.wrk@gmail.com" target="_blank" rel="noreferrer" className="contact-link">
-        <i className="fa fa-envelope-o" aria-hidden="true"></i>
-        <span>Email</span> 
-      </a>
-    </p>
-
-    <p>
-      <a href="https://wa.me/085188661193" target="_blank" rel="noreferrer" className='contact-link'>
-      <i className='fa fa-phone' aria-hidden="true"></i>  
-      <span>Phone</span>
-      </a>
-    </p>
-
-    <p>
-      <a href="https://instagram.com/rybaniism" target="_blank" rel="noreferrer" className="contact-link">
-        <i className="fa fa-instagram" aria-hidden="true"></i>
-        <span>Instagram</span>
-      </a>
-    </p>
-
-    <p>
-      <a href="https://linkedin.com/in/cherry-geva-raya-rabbani" target="_blank" rel="noreferrer" className="contact-link">
-        <i className="fa fa-linkedin-square" aria-hidden="true"></i>
-        <span>Linkdln</span>
-      </a>
-    </p>
-  </div>
-  </Modal>
-      </div> {/* Tutup div frame */}
-    </div> /* Tutup div home-bg */
-  );
->>>>>>> 70a71424ea950b6a4167eb967ebe60411b7c2703
 }

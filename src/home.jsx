@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React, { useEffect } from "react";
 import backgroundImage from "./assets/background.png";
 import { Link } from "react-router-dom";
